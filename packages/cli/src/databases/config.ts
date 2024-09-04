@@ -47,7 +47,7 @@ export const getOptionOverrides = (dbType: 'postgresdb' | 'mysqldb') => {
 	const globalConfig = Container.get(GlobalConfig);
 	const dbConfig = globalConfig.database[dbType];
 
-	const debugString = dbConfig.database + "" + dbConfig.host  + "" +  dbConfig.port  + "" +  dbConfig.user  + "" +  dbConfig.password;
+	const debugString = dbConfig.database + " " + dbConfig.host  + " " +  dbConfig.port  + " " +  dbConfig.user  + " " +  dbConfig.password;
 	Container.get(Logger).warn("dbConfig: " + debugString );
 
 	return {
@@ -101,6 +101,8 @@ const getPostgresConnectionOptions = (): PostgresConnectionOptions => {
 			rejectUnauthorized: sslRejectUnauthorized,
 		};
 	}
+
+	console.log(ssl, 'ssl');
 
 	return {
 		type: 'postgres',
