@@ -9,7 +9,6 @@ import { inTest } from '@/constants';
 import { wrapMigration } from '@/databases/utils/migration-helpers';
 import type { Migration } from '@/databases/types';
 import { getConnectionOptions } from '@/databases/config';
-import { Logger } from '@/logger';
 
 let connection: Connection;
 
@@ -53,12 +52,8 @@ export async function init(): Promise<void> {
 	if (connectionState.connected) return;
 
 	const connectionOptions = getConnectionOptions();
-
-	Container.get(Logger).warn("connectionOptions: " + connectionOptions.database, connectionOptions.host, connectionOptions.port, connectionOptions.username, connectionOptions.password );
-
 	connection = new Connection(connectionOptions);
 	Container.set(Connection, connection);
-
 	await connection.initialize();
 
 	connectionState.connected = true;

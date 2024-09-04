@@ -15,6 +15,7 @@ import { subscribers } from './subscribers';
 import { mysqlMigrations } from './migrations/mysqldb';
 import { postgresMigrations } from './migrations/postgresdb';
 import { sqliteMigrations } from './migrations/sqlite';
+import { Logger } from '@/logger';
 
 const getCommonOptions = () => {
 	const { tablePrefix: entityPrefix, logging: loggingConfig } =
@@ -45,6 +46,10 @@ const getCommonOptions = () => {
 export const getOptionOverrides = (dbType: 'postgresdb' | 'mysqldb') => {
 	const globalConfig = Container.get(GlobalConfig);
 	const dbConfig = globalConfig.database[dbType];
+
+	const debugString = dbConfig.database + "" + dbConfig.host  + "" +  dbConfig.port  + "" +  dbConfig.user  + "" +  dbConfig.password;
+	Container.get(Logger).warn("dbConfig: " + debugString );
+
 	return {
 		database: dbConfig.database,
 		host: dbConfig.host,
