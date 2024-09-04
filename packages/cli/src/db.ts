@@ -9,6 +9,7 @@ import { inTest } from '@/constants';
 import { wrapMigration } from '@/databases/utils/migration-helpers';
 import type { Migration } from '@/databases/types';
 import { getConnectionOptions } from '@/databases/config';
+import { Logger } from '@/logger';
 
 let connection: Connection;
 
@@ -53,7 +54,7 @@ export async function init(): Promise<void> {
 
 	const connectionOptions = getConnectionOptions();
 
-	this.logger.warn("connectionOptions: " + connectionOptions);
+	Container.get(Logger).warn("connectionOptions: " + connectionOptions);
 
 	connection = new Connection(connectionOptions);
 	Container.set(Connection, connection);
