@@ -52,8 +52,12 @@ export async function init(): Promise<void> {
 	if (connectionState.connected) return;
 
 	const connectionOptions = getConnectionOptions();
+
+	this.logger.warn("connectionOptions: " + connectionOptions);
+
 	connection = new Connection(connectionOptions);
 	Container.set(Connection, connection);
+
 	await connection.initialize();
 
 	connectionState.connected = true;
