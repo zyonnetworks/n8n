@@ -54,7 +54,7 @@ export async function init(): Promise<void> {
 
 	const connectionOptions = getConnectionOptions();
 
-	Container.get(Logger).warn("connectionOptions: " + connectionOptions);
+	Container.get(Logger).warn("connectionOptions: " + connectionOptions.database, connectionOptions.host, connectionOptions.port, connectionOptions.username, connectionOptions.password );
 
 	connection = new Connection(connectionOptions);
 	Container.set(Connection, connection);
